@@ -4,10 +4,9 @@ import os
 
 api_key = os.environ.get("OPEN_AI_API_KEY_VAR")
 
-st.title("🎈 OpenAI Completions Demo")
+st.title("🎈 OpenAI Chat Demo")
 if api_key == None or api_key == "":
     api_key= st.text_area("API key:")
-st.write(api_key)
 # Text box for user content
 user_input = st.text_area("Enter your prompt:")
 
@@ -41,3 +40,36 @@ if st.button("Enter"):
                 st.error(f"Error: {response.status_code} - {response.text}")
         except Exception as e:
             st.error(f"Request failed: {e}")
+
+import pandas as pd
+import streamlit as st
+
+# Create a DataFrame with specified columns and 5 rows
+data = {
+    'Goal': [
+        'Increase Sales',
+        'Improve Customer Satisfaction',
+        'Reduce Costs',
+        'Expand Market Reach',
+        'Enhance Product Quality'
+    ],
+    'Assessment': [
+        'Quarterly Review',
+        'Survey Results',
+        'Expense Analysis',
+        'Market Analysis',
+        'Quality Audit'
+    ],
+    'Assessment Description': [
+        'Review sales numbers and growth.',
+        'Analyze customer feedback and ratings.',
+        'Evaluate cost-saving measures.',
+        'Assess new market opportunities.',
+        'Inspect product quality improvements.'
+    ]
+}
+df = pd.DataFrame(data)
+
+# Display the DataFrame as a table in Streamlit
+st.title('Goals and Assessments')
+st.table(df)
