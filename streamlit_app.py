@@ -1,9 +1,13 @@
 import streamlit as st
 import requests
 import os
-api_key = os.environ.get("OPEN_AI_API_KEY_VAR")
-st.title("🎈 OpenAI Completions Demo")
 
+api_key = os.environ.get("OPEN_AI_API_KEY_VAR")
+
+st.title("🎈 OpenAI Completions Demo")
+if api_key == None or api_key == "":
+    api_key= st.text_area("API key:")
+st.write(api_key)
 # Text box for user content
 user_input = st.text_area("Enter your prompt:")
 
@@ -13,7 +17,7 @@ if st.button("Enter"):
         st.error("Please enter some text.")
     else:
         headers = {
-            "Authorization": f"Bearer ",
+            "Authorization": f"Bearer {api_key}",
             "Content-Type": "application/json"
         }
         data = {
